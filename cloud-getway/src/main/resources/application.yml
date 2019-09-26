@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: GETWAY
+server:
+  port: 8080
+zuul:
+  routes:
+    API:
+      path: /api/**
+      service-id: API
+    AUTH:
+      path: /uaa/**
+      service-id: AUTH
+  add-proxy-headers: true
+
+security:
+  oauth2:
+    client:
+      user-authorization-uri: http://localhost:8080/uaa/oauth/authorize
+      access-token-uri: http://localhost:8080/uaa/oauth/token
+      client-id: client
+    resource:
+      user-info-uri: http://localhost:8080/uaa/user
+      prefer-token-info: false
+eureka:
+  client:
+    service-url: http://localhost:8082/eureka
